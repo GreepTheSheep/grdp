@@ -1,7 +1,9 @@
 require("dotenv").config();
 const fetch = require("node-fetch"),
     { execFile } = require("child_process"),
-    sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+    express = require('express')(),
+    port = 15000,
+    { readFileSync } = require("fs");
 
 (async () => {
     execFile(`.\\ngrok\\ngrok.exe`, [
@@ -10,6 +12,7 @@ const fetch = require("node-fetch"),
         "--authtoken=" + process.env.NGROK_AUTH_TOKEN,
         "--config=.\\ngrok.yml"
     ]);
+    console.log("Waiting for ngrok to start...");
     const ngrokTunnels = await fetch("https://api.ngrok.com/tunnels", {
         method: "GET",
         headers: {
@@ -25,9 +28,19 @@ const fetch = require("node-fetch"),
 
     const ngrokTunnel = ngrokTunnels.tunnels[0];
 
-    let ngrokURL = ngrokTunnel.public_url.replace(ngrokTunnel.public_url.indexOf("://") + 3, "");
+    // let ngrokURL = ngrokTunnel.public_url.replace(ngrokTunnel.public_url.substr(0, ngrokTunnel.public_url.indexOf("://") + 3), "");
 
-    console.log("Ngrok URL: " + ngrokURL);
+    console.log("Ngrok URL: " + ngrokTunnel.public_url);
 
-    await sleep(12 * 60 * 60 * 1000);
+    express.get('/', (req, res) => {
+        res.redirect(ngrokTunnel.public_url);
+    });
+
+    express.get('/log', (req, res) => {
+        res.send(readFileSync(".\\ngrok.log", "utf8"));
+    });
+
+    express.listen(port, () => {
+        console.log('Express server listening on port '+port);
+    });
 })();
