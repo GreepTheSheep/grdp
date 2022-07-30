@@ -31,6 +31,6 @@ jobs:
     - name: Create account
       run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "${{ secrets.PSWD }}" -Force)
     - name: Start service
-      run: .\ngrok\ngrok.exe start --all --authtoken=$Env:NGROK_AUTH_TOKEN --config=.\ngrok.yml --region=eu
+      run: Start-Job -ScriptBlock{.\ngrok\ngrok.exe start --all --authtoken=$Env:NGROK_AUTH_TOKEN --config=.\ngrok.yml --region=eu}
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
