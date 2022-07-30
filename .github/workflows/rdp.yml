@@ -30,7 +30,5 @@ jobs:
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - name: Create account
       run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "${{ secrets.PSWD }}" -Force)
-    - name: Install service
-      run: .\ngrok\ngrok.exe service install --config ./ngrok.yml
     - name: Start service
-      run: .\ngrok\ngrok.exe service start
+      run: .\ngrok\ngrok.exe start --all --config=.\ngrok.yml --region=eu
