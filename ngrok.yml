@@ -1,7 +1,7 @@
 authtoken: ${NGROK_AUTH_TOKEN}
 log: ngrok.log
 tunnels:
-  first:
+  rdp:
     addr: 3389
     proto: tcp
     bind_tls: true
