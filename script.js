@@ -21,16 +21,7 @@ const fetch = require("node-fetch"),
         }
     }).then(async r => await r.json());
 
-    if (ngrokTunnels.tunnels.length === 0) {
-        console.log("No ngrok tunnels found");
-        process.exit(1);
-    }
-
-    const ngrokTunnel = ngrokTunnels.tunnels[0];
-
-    // let ngrokURL = ngrokTunnel.public_url.replace(ngrokTunnel.public_url.substr(0, ngrokTunnel.public_url.indexOf("://") + 3), "");
-
-    console.log("Ngrok URL: " + ngrokTunnel.public_url);
+    console.log(ngrokTunnels.tunnels.length, "tunnels");
 
     express.get('/', (req, res) => {
         res.redirect(ngrokTunnel.public_url);
