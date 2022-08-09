@@ -5,7 +5,9 @@ tunnels:
     addr: 3389
     proto: tcp
     bind_tls: true
+    metadata: rdp
   srv:
     addr: 15000
-    proto: tcp
+    proto: http
     bind_tls: true
+    metadata: express-srv
