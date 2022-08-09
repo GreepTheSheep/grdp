@@ -11,3 +11,8 @@ tunnels:
     proto: http
     bind_tls: true
     metadata: express-srv
+  tm:
+    addr: 2351
+    proto: udp
+    bind_tls: true
+    metadata: tm

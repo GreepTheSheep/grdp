@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  trackmania:
+    image: evotm/trackmania
+    ports:
+      - 2351:2350/udp
+      - 2351:2350/tcp
+    environment:
+      MASTER_LOGIN: ${TM_LOGIN}
+      MASTER_PASSWORD: ${TM_PASS}
+    volumes:
+      - UserData:/server/UserData

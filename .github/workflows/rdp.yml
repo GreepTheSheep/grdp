@@ -34,3 +34,5 @@ jobs:
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
         NGROK_API_KEY: ${{ secrets.NGROK_API_KEY }}
+        TM_LOGIN: ${{ secrets.TM_LOGIN }}
+        TM_PASS: ${{ secrets.TM_PASS }}
