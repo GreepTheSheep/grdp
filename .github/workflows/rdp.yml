@@ -36,3 +36,4 @@ jobs:
         NGROK_API_KEY: ${{ secrets.NGROK_API_KEY }}
         TM_LOGIN: ${{ secrets.TM_LOGIN }}
         TM_PASS: ${{ secrets.TM_PASS }}
+        TM_USERDATA_URL: ${{ secrets.TM_USERDATA_URL }}
